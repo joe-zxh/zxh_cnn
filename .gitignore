@@ -1,0 +1,14 @@
+.DS_Store
+.svn
+
+# idea
+.idea/
+
+# python
+__pycache__/
+
+# zxh ml
+data/
+save_models/
+
+
