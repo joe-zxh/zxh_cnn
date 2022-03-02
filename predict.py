@@ -23,15 +23,9 @@ if __name__ == '__main__':
     net = LeNet()
     net.load_state_dict(torch.load('./save_models/LeNet.pth'))
 
-    im = Image.open('plane.png')
-    im = transforms.ToTensor()(im)
-    im = im[:3]
-    t2 = transforms.Compose([
-        transforms.Resize((32, 32)),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-    ])
-    im = t2(im)
-    im = torch.unsqueeze(im, dim=0) # 扩展成(batch_size, channel, height, width)
+    im = Image.open('plane.png').convert('RGB')
+    im = pre_trans(im)
+    im = torch.unsqueeze(im, dim=0)  # 扩展成(batch_size, channel, height, width)
 
     with torch.no_grad():
         outputs = net(im)
